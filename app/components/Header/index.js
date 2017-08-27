@@ -1,31 +1,60 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { Link } from 'react-router';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+//components
+import Label from '../Label';
 
-import A from './A';
-import Img from './Img';
-import NavBar from './NavBar';
-import HeaderLink from './HeaderLink';
-import Banner from './banner.jpg';
-import messages from './messages';
+export class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  state = {
+    isOpen: false,
+    active: 0
+  };
+  
+  toggle = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
 
-class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
   render() {
     return (
-      <div>
-        <A href="https://twitter.com/mxstbr">
-          <Img src={Banner} alt="react-boilerplate - Logo" />
-        </A>
-        <NavBar>
-          <HeaderLink to="/">
-            <FormattedMessage {...messages.home} />
-          </HeaderLink>
-          <HeaderLink to="/features">
-            <FormattedMessage {...messages.features} />
-          </HeaderLink>
-        </NavBar>
-      </div>
+        <Navbar color="primary" fixed="top" light={true} toggleable>
+          <NavbarToggler right onClick={this.toggle} />
+          <NavbarBrand href="/">
+            <Label
+              fontSize="35px"
+            >
+              Buffet App
+            </Label>
+          </NavbarBrand>
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink href="/reservation-seat">
+                  <Label
+                    fontSize="20px"
+                  >
+                    Reservation Queue
+                  </Label>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="https://github.com/reactstrap/reactstrap">
+                  <Label
+                    fontSize="20px"
+                  >
+                    Github
+                  </Label>
+                </NavLink>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Navbar>
     );
   }
 }
+
 
 export default Header;

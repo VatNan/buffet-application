@@ -28,7 +28,7 @@ function GroupSeat(props) {
             >
                 {props.description}
             </Label>
-            <Block style={{ display: 'flex', width: '100%' }}>
+            <Block style={{ display: "flex", width: "100%" }}>
                 <ButtonGroup className="row justify-content-center" style={{ flex: 1 }}>
                     <Seats seats={props.seats}/>
                 </ButtonGroup>

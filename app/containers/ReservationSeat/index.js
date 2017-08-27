@@ -45,7 +45,7 @@ export class ReservationSeat extends React.Component { // eslint-disable-line re
 
         <Block
           flex="1"
-          bgColor="white"
+          bgColor="#cee6fb"
           padding="6px"
           direction="column"
           margin="25px 0px"
@@ -83,7 +83,7 @@ export class ReservationSeat extends React.Component { // eslint-disable-line re
         </Block>
         <Block
           flex="1"
-          bgColor="white"
+          bgColor="#cee6fb"
           padding="6px"
           direction="column"
           margin="25px 0px"
@@ -113,7 +113,7 @@ export class ReservationSeat extends React.Component { // eslint-disable-line re
 
         <Block
           flex="1"
-          bgColor="white"
+          bgColor="#cee6fb"
           padding="6px"
           direction="column"
           margin="25px 0px"
@@ -147,7 +147,7 @@ export class ReservationSeat extends React.Component { // eslint-disable-line re
 
         <Block
           flex="1"
-          bgColor="white"
+          bgColor="#cee6fb"
           padding="6px"
           direction="column"
           margin="25px 0px"

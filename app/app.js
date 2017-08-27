@@ -42,6 +42,9 @@ import { translationMessages } from './i18n';
 // Import CSS reset and Global Styles
 import './global-styles';
 
+//Import bootstrap 4
+import 'bootstrap/dist/css/bootstrap.css';
+
 // Import routes
 import createRoutes from './routes';
 

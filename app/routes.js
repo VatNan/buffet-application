@@ -47,6 +47,26 @@ export default function createRoutes(store) {
           .catch(errorLoading);
       },
     }, {
+      path: '/reservation-seat',
+      name: 'reservationSeat',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/ReservationSeat/reducer'),
+          import('containers/ReservationSeat/sagas'),
+          import('containers/ReservationSeat'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('reservationSeat', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

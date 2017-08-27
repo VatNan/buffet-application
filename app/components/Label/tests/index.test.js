@@ -1,9 +1,9 @@
 // import React from 'react';
 // import { shallow } from 'enzyme';
 
-// import Button from '../index';
+// import Label from '../index';
 
-describe('<Button />', () => {
+describe('<Label />', () => {
   it('Expect to have unit tests specified', () => {
     expect(true).toEqual(false);
   });

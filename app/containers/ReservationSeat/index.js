@@ -14,6 +14,7 @@ import { Button, ButtonGroup, ButtonToolbar } from 'reactstrap';
 import Label from '../../components/Label';
 import Block from '../../components/Block';
 import Card from '../../components/Card';
+import TitleBlock from '../../components/TitleBlock'
 
 export class ReservationSeat extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -21,6 +22,7 @@ export class ReservationSeat extends React.Component { // eslint-disable-line re
       <Block
         direction="column"
         flex="1"
+        margin="90px 0px 0px 0px"
       >
         <Helmet
           title="ReservationSeat"
@@ -28,21 +30,9 @@ export class ReservationSeat extends React.Component { // eslint-disable-line re
             { name: 'description', content: 'Description of ReservationSeat' },
           ]}
         />
-        <Card
-          border="0px"
-          direction="column"
-          bgColor="#1c51a2"
-          padding="6px 0px"
-          alignItems="center"
-          haveShadow={true}
-        >
-          <Label
-            fontSize="30px"
-          >
-            จองโต๊ะ
-          </Label>
-        </Card>
-
+        <TitleBlock 
+          title="จองโต๊ะ"
+        />
         <Block
           flex="1"
           bgColor="#cee6fb"
@@ -81,6 +71,8 @@ export class ReservationSeat extends React.Component { // eslint-disable-line re
             </ButtonGroup>
           </Block>
         </Block>
+
+
         <Block
           flex="1"
           bgColor="#cee6fb"
@@ -110,6 +102,9 @@ export class ReservationSeat extends React.Component { // eslint-disable-line re
           </Block>
 
         </Block>
+
+
+
 
         <Block
           flex="1"
@@ -173,8 +168,8 @@ export class ReservationSeat extends React.Component { // eslint-disable-line re
               <Button className="col-4 m-2" size="lg">B12</Button>
             </ButtonGroup>
           </Block>
-
         </Block>
+        
       </Block>
     );
   }

@@ -18,6 +18,7 @@ function GroupSeat(props) {
             <Label
                 fontSize="20px"
                 color="black"
+                style={{ alignSelf: 'center' }}
             >
 
                 {props.title}
@@ -25,6 +26,7 @@ function GroupSeat(props) {
             <Label
                 fontSize="20px"
                 color="black"
+                style={{ alignSelf: 'center' }}
             >
                 {props.description}
             </Label>

@@ -7,14 +7,25 @@ const CLASS_BY_GROUP = {
     B: "col-4 m-2"
 };
 
+const TEXT_BY_SEAT = {
+    free: 'ว่าง',
+    busy: 'ไม่ว่าง',
+    reserve: 'จอง'
+}
+
 function Seats(props) {
     return props.seats.map((seat, index) => (
         <Button 
             key={index} 
-            className={CLASS_BY_GROUP[props.group] || ""} 
+            className={CLASS_BY_GROUP[props.zone] || ""} 
             size="lg"
         >
-            { seat.group + seat.index }
+            { seat.zone + seat.index }
+            <p 
+                style={{ margin: '0px' }}
+            >
+                {TEXT_BY_SEAT[seat.status] || ""}}
+            </p>
         </Button>
     ));
 }

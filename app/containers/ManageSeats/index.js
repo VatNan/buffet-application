@@ -1,6 +1,6 @@
 /*
  *
- * ReservationSeat
+ * ManageSeats
  *
  */
 
@@ -27,7 +27,7 @@ import Card from '../../components/Card';
 import GroupSeat from './GroupSeat';
 import TitleBlock from '../../components/TitleBlock';
 
-export class ReservationSeat extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class ManageSeats extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
       this.props.loadSeats();
   }
@@ -41,9 +41,9 @@ export class ReservationSeat extends React.Component { // eslint-disable-line re
         margin="90px 0px 0px 0px"
       >
         <Helmet
-          title="ReservationSeat"
+          title="จัดการที่นั่ง"
           meta={[
-            { name: 'description', content: 'Description of ReservationSeat' },
+            { name: 'description', content: 'Description of ManageSeats' },
           ]}
         />
         <TitleBlock 
@@ -73,17 +73,18 @@ export class ReservationSeat extends React.Component { // eslint-disable-line re
           seats={this.props.seatsZoneBLimit2}
         >
         </GroupSeat>
+        
       </Block>
     );
   }
 }
 
-ReservationSeat.propTypes = {
+ManageSeats.propTypes = {
   // dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  // ReservationSeat: makeSelectReservationSeat(),
+  // ManageSeats: makeSelectManageSeats(),
   loading: makeSelectLoading(),
   guide: makeSelectGuide(),
   error: makeSelectError(),
@@ -105,4 +106,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReservationSeat);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageSeats);

@@ -33,13 +33,13 @@ export class Header extends React.Component { // eslint-disable-line react/prefe
             <Nav className="ml-auto" navbar>
               <NavItem>
                 <Link 
-                  to="/reservation-seat"
+                  to="/manage-seats"
                   style={{ margin: "0px 10px" }}
                 >
                   <Label
                     fontSize="20px"
                   >
-                    Reservation Queue
+                    จัดการที่นั่ง
                   </Label>
                 </Link>
               </NavItem>

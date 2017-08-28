@@ -1,6 +1,6 @@
 /*
  *
- * ReservationSeat actions
+ * ManageSeats actions
  *
  */
 

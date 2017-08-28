@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect';
 
 /**
- * Direct selector to the reservationSeat state domain
+ * Direct selector to the manageSeats state domain
  */
-const selectReservationSeatDomain = () => (state) => state.get('reservationSeat');
+const selectManageSeatsDomain = () => (state) => state.get('manageSeats');
 
 /**
  * Other specific selectors
@@ -11,58 +11,58 @@ const selectReservationSeatDomain = () => (state) => state.get('reservationSeat'
 
 
 /**
- * Default selector used by ReservationSeat
+ * Default selector used by ManageSeats
  */
 
-const makeSelectReservationSeat = () => createSelector(
-  selectReservationSeatDomain(),
+const makeSelectManageSeats = () => createSelector(
+  selectManageSeatsDomain(),
   (substate) => substate.toJS()
 );
 
 const makeSelectLoading = () => createSelector(
-  selectReservationSeatDomain(),
+  selectManageSeatsDomain(),
   (substate) => substate.get('loading')
 );
 
 const makeSelectGuide = () => createSelector(
-  selectReservationSeatDomain(),
+  selectManageSeatsDomain(),
   (substate) => substate.get('guide')
 );
 
  
 const makeSelectError = () => createSelector(
-  selectReservationSeatDomain(),
+  selectManageSeatsDomain(),
   (substate) => substate.get('error')
 );
 
 const makeSelectErrorMessage = () => createSelector(
-  selectReservationSeatDomain(),
+  selectManageSeatsDomain(),
   (substate) => substate.get('errorMessage')
 );
 
 const makeSelectSeatsZoneA = () => createSelector(
-  selectReservationSeatDomain(),
+  selectManageSeatsDomain(),
   (substate) => substate.get('seatsZoneA').toJS()
 );
 
 const makeSelectSeatsZoneBLimit8 = () => createSelector(
-  selectReservationSeatDomain(),
+  selectManageSeatsDomain(),
   (substate) => substate.get('seatsZoneBLimit8').toJS()
 );
 
 const makeSelectSeatsZoneBLimit4 = () => createSelector(
-  selectReservationSeatDomain(),
+  selectManageSeatsDomain(),
   (substate) => substate.get('seatsZoneBLimit4').toJS()
 );
 
 const makeSelectSeatsZoneBLimit2 = () => createSelector(
-  selectReservationSeatDomain(),
+  selectManageSeatsDomain(),
   (substate) => substate.get('seatsZoneBLimit2').toJS()
 );
 
-export default makeSelectReservationSeat;
+export default makeSelectManageSeats;
 export {
-  selectReservationSeatDomain,
+  selectManageSeatsDomain,
   makeSelectLoading,
   makeSelectGuide,
   makeSelectError,

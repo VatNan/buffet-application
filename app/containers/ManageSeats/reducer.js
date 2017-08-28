@@ -1,6 +1,6 @@
 /*
  *
- * ReservationSeat reducer
+ * ManageSeats reducer
  *
  */
 
@@ -50,7 +50,7 @@ function setSeatsFirstTime(state, action) {
       .set('loading', false);
 }
 
-function reservationSeatReducer(state = initialState, action) {
+function manageSeatsReducer(state = initialState, action) {
   switch (action.type) {
     // case DEFAULT_ACTION:
     //   return state;
@@ -75,4 +75,4 @@ function reservationSeatReducer(state = initialState, action) {
   }
 }
 
-export default reservationSeatReducer;
+export default manageSeatsReducer;

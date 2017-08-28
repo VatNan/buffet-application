@@ -47,19 +47,19 @@ export default function createRoutes(store) {
           .catch(errorLoading);
       },
     }, {
-      path: '/reservation-seat',
-      name: 'reservationSeat',
+      path: '/manage-seats',
+      name: 'manageSeats',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/ReservationSeat/reducer'),
-          import('containers/ReservationSeat/sagas'),
-          import('containers/ReservationSeat'),
+          import('containers/ManageSeats/reducer'),
+          import('containers/ManageSeats/sagas'),
+          import('containers/ManageSeats'),
         ]);
 
         const renderRoute = loadModule(cb);
 
         importModules.then(([reducer, sagas, component]) => {
-          injectReducer('reservationSeat', reducer.default);
+          injectReducer('manageSeats', reducer.default);
           injectSagas(sagas.default);
           renderRoute(component);
         });

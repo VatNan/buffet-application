@@ -9,7 +9,7 @@ const opts = {
     retry: true
 };
 
-const sync = pouchdb.sync(db, remotedDB, opts)
+const sync = pouchdb.sync(db, remotedDB, opts);
 
 export default {
     sync,

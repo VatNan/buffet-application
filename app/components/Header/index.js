@@ -32,22 +32,28 @@ export class Header extends React.Component { // eslint-disable-line react/prefe
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/reservation-seat">
+                <Link 
+                  to="/reservation-seat"
+                  style={{ margin: "0px 10px" }}
+                >
                   <Label
                     fontSize="20px"
                   >
                     Reservation Queue
                   </Label>
-                </NavLink>
+                </Link>
               </NavItem>
               <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">
+                <Link 
+                  to="https://github.com/reactstrap/reactstrap"
+                  style={{ margin: "0px 10px" }}
+                >
                   <Label
                     fontSize="20px"
                   >
                     Github
                   </Label>
-                </NavLink>
+                </Link>
               </NavItem>
             </Nav>
           </Collapse>

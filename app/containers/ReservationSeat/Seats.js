@@ -14,20 +14,23 @@ const TEXT_BY_SEAT = {
 }
 
 function Seats(props) {
+    if (props.seats.length === 0) return;
+
     return props.seats.map((seat, index) => (
         <Button 
             key={index} 
-            className={CLASS_BY_GROUP[props.zone] || ""} 
+            className={CLASS_BY_GROUP[seat.zone] || ""} 
             size="lg"
         >
-            { seat.zone + seat.index }
+            { seat.zone + seat.no }
             <p 
                 style={{ margin: '0px' }}
             >
-                {TEXT_BY_SEAT[seat.status] || ""}}
+                {TEXT_BY_SEAT[seat.status] || ""}
             </p>
         </Button>
     ));
+    
 }
 
 export default Seats;

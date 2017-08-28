@@ -7,6 +7,7 @@ import Label from '../../components/Label';
 
 
 function GroupSeat(props) {
+    console.log("GroupSeat", props)
     return (
         <Block
             flex="1"
@@ -32,7 +33,7 @@ function GroupSeat(props) {
             </Label>
             <Block style={{ display: "flex", width: "100%" }}>
                 <ButtonGroup className="row justify-content-center" style={{ flex: 1 }}>
-                    <Seats seats={props.seats}/>
+                    { Seats({ seats: props.seats }) }
                 </ButtonGroup>
             </Block>
         </Block>

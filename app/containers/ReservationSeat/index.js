@@ -8,16 +8,32 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
-import makeSelectReservationSeat from './selectors';
+import {
+  makeSelectLoading,
+  makeSelectGuide,
+  makeSelectError,
+  makeSelectErrorMessage,
+  makeSelectSeatsZoneA,
+  makeSelectSeatsZoneBLimit2,
+  makeSelectSeatsZoneBLimit4,
+  makeSelectSeatsZoneBLimit8
+} from './selectors';
+import { loadSeats } from './actions';
 //components
 import { Button, ButtonGroup, ButtonToolbar } from 'reactstrap';
 import Label from '../../components/Label';
 import Block from '../../components/Block';
 import Card from '../../components/Card';
-import TitleBlock from '../../components/TitleBlock'
+import GroupSeat from './GroupSeat';
+import TitleBlock from '../../components/TitleBlock';
 
 export class ReservationSeat extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  componentDidMount() {
+      this.props.loadSeats();
+  }
+
   render() {
+    console.log("render => {}", this.props)
     return (
       <Block
         direction="column"
@@ -33,160 +49,60 @@ export class ReservationSeat extends React.Component { // eslint-disable-line re
         <TitleBlock 
           title="จองโต๊ะ"
         />
-        <Block
-          flex="1"
-          bgColor="#cee6fb"
-          padding="6px"
-          direction="column"
-          margin="25px 0px"
+        <GroupSeat
+          title="Zone A (have 1 counter)"
+          description="(1 counter: 12 seat)"
+          seats={this.props.seatsZoneA}
         >
-          <Label
-            fontSize="20px"
-            color="black"
-          >
-
-            Zone A (have 1 counter)
-          </Label>
-          <Label
-            fontSize="20px"
-            color="black"
-          >
-
-            : (1 counter: 12 seat)
-          </Label>
-          <Block style={{ display: 'flex', width: '100%' }}>
-            <ButtonGroup className="row justify-content-center" style={{ flex: 1 }}>
-              <Button className="col-4 col-sm-3 m-1" size="lg">A01</Button>
-              <Button className="col-4 col-sm-3 m-1" size="lg">A02</Button>
-              <Button className="col-4 col-sm-3 m-1" size="lg">A03</Button>
-              <Button className="col-4 col-sm-3 m-1" size="lg">A04</Button>
-              <Button className="col-4 col-sm-3 m-1" size="lg">A05</Button>
-              <Button className="col-4 col-sm-3 m-1" size="lg">A06</Button>
-              <Button className="col-4 col-sm-3 m-1" size="lg">A07</Button>
-              <Button className="col-4 col-sm-3 m-1" size="lg">A08</Button>
-              <Button className="col-4 col-sm-3 m-1" size="lg">A09</Button>
-              <Button className="col-4 col-sm-3 m-1" size="lg">A10</Button>
-              <Button className="col-4 col-sm-3 m-1" size="lg">A11</Button>
-              <Button className="col-4 col-sm-3 m-1" size="lg">A12</Button>
-            </ButtonGroup>
-          </Block>
-        </Block>
-
-
-        <Block
-          flex="1"
-          bgColor="#cee6fb"
-          padding="6px"
-          direction="column"
-          margin="25px 0px"
+        </GroupSeat>
+        <GroupSeat
+          title="Zone B (have 2 table)"
+          description="(1 table: 8 seat)"
+          seats={this.props.seatsZoneBLimit8}
         >
-          <Label
-            fontSize="20px"
-            color="black"
-          >
-            Zone B (have 2 table)
-          </Label>
-          <Label
-            fontSize="20px"
-            color="black"
-          >
-            : (1 table: 8 seat)
-          </Label>
-
-
-          <Block style={{ display: 'flex', width: '100%' }}>
-            <ButtonGroup className="row justify-content-center" style={{ flex: 1 }}>
-              <Button className="col-4 m-2" size="lg">B01</Button>
-              <Button className="col-4 m-2" size="lg">B02</Button>
-            </ButtonGroup>
-          </Block>
-
-        </Block>
-
-
-
-
-        <Block
-          flex="1"
-          bgColor="#cee6fb"
-          padding="6px"
-          direction="column"
-          margin="25px 0px"
+        </GroupSeat>
+        <GroupSeat
+          title="Zone B (have 6 table)"
+          description="(1 counter: 4 seat)"
+          seats={this.props.seatsZoneBLimit4}
         >
-          <Label
-            fontSize="20px"
-            color="black"
-          >
-            Zone B (have 6 table)
-          </Label>
-          <Label
-            fontSize="20px"
-            color="black"
-          >
-            : (1 table: 4 seat)
-          </Label>
-
-          <Block style={{ display: 'flex', width: '100%' }}>
-            <ButtonGroup className="row justify-content-center" style={{ flex: 1 }}>
-              <Button className="col-4 m-2" size="lg">B03</Button>
-              <Button className="col-4 m-2" size="lg">B04</Button>
-              <Button className="col-4 m-2" size="lg">B05</Button>
-              <Button className="col-4 m-2" size="lg">B06</Button>
-              <Button className="col-4 m-2" size="lg">B07</Button>
-              <Button className="col-4 m-2" size="lg">B08</Button>
-            </ButtonGroup>
-          </Block>
-
-        </Block>
-
-
-        <Block
-          flex="1"
-          bgColor="#cee6fb"
-          padding="6px"
-          direction="column"
-          margin="25px 0px"
+        </GroupSeat>
+        <GroupSeat
+          title="Zone B (have 4 table)"
+          description="(1 counter: 2 seat)"
+          seats={this.props.seatsZoneBLimit2}
         >
-          <Label
-            fontSize="20px"
-            color="black"
-          >
-            Zone B (have 4 table)
-          </Label>
-          <Label
-            fontSize="20px"
-            color="black"
-          >
-            : (1 table: 2 seat)
-          </Label>
-
-          <Block style={{ display: 'flex', width: '100%' }}>
-            <ButtonGroup className="row justify-content-center" style={{ flex: 1 }}>
-              <Button className="col-4 m-2" size="lg">B09</Button>
-              <Button className="col-4 m-2" size="lg">B10</Button>
-              <Button className="col-4 m-2" size="lg">B11</Button>
-              <Button className="col-4 m-2" size="lg">B12</Button>
-            </ButtonGroup>
-          </Block>
-        </Block>
-        
+        </GroupSeat>
       </Block>
     );
   }
 }
 
 ReservationSeat.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  // dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  ReservationSeat: makeSelectReservationSeat(),
+  // ReservationSeat: makeSelectReservationSeat(),
+  loading: makeSelectLoading(),
+  guide: makeSelectGuide(),
+  error: makeSelectError(),
+  errorMessage: makeSelectErrorMessage(),
+  seatsZoneA: makeSelectSeatsZoneA(),
+  seatsZoneBLimit8: makeSelectSeatsZoneBLimit2(), // have 8 seat per 1 table
+  seatsZoneBLimit4: makeSelectSeatsZoneBLimit4(), // have 4 seat per 1 table
+  seatsZoneBLimit2: makeSelectSeatsZoneBLimit8(), // have 2 seat per 1 table
 });
 
 function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
+  // return {
+  //   dispatch,
+  // };
+  return { 
+    loadSeats: () => {
+      dispatch(loadSeats()); 
+    }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReservationSeat);

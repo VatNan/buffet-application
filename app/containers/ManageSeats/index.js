@@ -26,6 +26,7 @@ import Block from '../../components/Block';
 import Card from '../../components/Card';
 import GroupSeat from './GroupSeat';
 import TitleBlock from '../../components/TitleBlock';
+import ManegeBlock from './ManegeBlock';
 
 export class ManageSeats extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
@@ -33,7 +34,6 @@ export class ManageSeats extends React.Component { // eslint-disable-line react/
   }
 
   render() {
-    console.log("render => {}", this.props)
     return (
       <Block
         direction="column"
@@ -47,8 +47,9 @@ export class ManageSeats extends React.Component { // eslint-disable-line react/
           ]}
         />
         <TitleBlock 
-          title="จองโต๊ะ"
+          title="จัดการที่นั่ง"
         />
+        <ManegeBlock/>
         <GroupSeat
           title="Zone A (have 1 counter)"
           description="(1 counter: 12 seat)"

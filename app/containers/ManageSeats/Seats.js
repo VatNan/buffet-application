@@ -10,7 +10,7 @@ import { Button } from 'reactstrap';
 
 
 function Seats(props) {
-    if (props.seats.length === 0) return;
+    // if (props.seats.length === 0) return;
 
     return props.seats.map((seat, index) => (
         <Button 

@@ -1,4 +1,5 @@
 import { take, call, put, select, cancel, takeLatest } from 'redux-saga/effects';
+import { LOCATION_CHANGE } from 'react-router-redux';
 import {
   seatsLoaded,
   seatsLoadedError
@@ -33,6 +34,8 @@ export function* getSeats() {
 
 export function* rootSagaSeats() {
   const watcher = yield takeLatest(LOAD_SEATS_REQUEST, getSeats);
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
   // yield cancel(watcher);
   // yield cancel(watcher);
 }

@@ -1,4 +1,4 @@
-import { take, call, put, select, cancel, takeLatest } from 'redux-saga/effects';
+import { take, call, put, select, cancel, takeLatest, fork } from 'redux-saga/effects';
 import {
   customerAmountPass,
   customerAmountFail,
@@ -20,6 +20,7 @@ import {
   CHOOSE_SEATS_REQUEST,
   CREATE_BILL_REQUEST
 } from './constants';
+import { LOCATION_CHANGE } from 'react-router-redux';
 import { push } from 'react-router-redux';
 //pouchdb
 import pouchdb from '../../config/pouchdb';
@@ -109,6 +110,12 @@ export function* rootSagaCreateBill() {
   const watcherCheckCustomer = yield takeLatest(CHECK_CUSTOMER_AMOUNT_REQUEST, checkCustomerAmount);
   const watchChooseSeats = yield takeLatest(CHOOSE_SEATS_REQUEST, chooseSeatsInSaga);
   const watchCreateBill = yield takeLatest(CREATE_BILL_REQUEST, chooseCreateBillSaga);
+
+  // Suspend execution until location changes
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcherCheckCustomer);
+  yield cancel(watchChooseSeats);
+  yield cancel(watchCreateBill);
 }
 
 // All sagas to be loaded

@@ -52,7 +52,7 @@ const makeSelectCustomerAmount = () => createSelector(
 
 const makeSelectSeatsIsSelect = () => createSelector(
   selectCreateBillDomain(),
-  (substate) => substate.get('seatsIsSelect').toJS()
+  (substate) => substate.get('seatsIsSelect')
 );
 
 const makeSelectMax = () => createSelector(
@@ -86,13 +86,38 @@ const makeSelectSeats = () => createSelector(
     //edit format seats for react-select
     let seatsForSelect = seatsFree.map((seatFree) => {
       return ({
-        label: seatFree.zone + seatFree.no,
+        label: seatFree.zone + seatFree.no + " (มี " + seatFree.limit + " ที่นั่ง)",
         value: seatFree._id
       });
     });
 
     return seatsForSelect;
   }
+);
+
+
+const makeSelectSeatsObject = () => createSelector(
+    selectManageSeatsDomain(),
+    (substate) => {
+      let seatsZoneA = substate.get('seatsZoneA').toJS(); 
+      let seatsZoneBLimit8 = substate.get('seatsZoneBLimit8').toJS(); 
+      let seatsZoneBLimit4 =  substate.get('seatsZoneBLimit4').toJS(); 
+      let seatsZoneBLimit2 =  substate.get('seatsZoneBLimit2').toJS();
+
+      //get all seats
+      let allSeat = seatsZoneA
+        .concat(seatsZoneBLimit8)
+        .concat(seatsZoneBLimit4)
+        .concat(seatsZoneBLimit2);
+
+      let seatsObj = {};
+      //set seats in obj
+      allSeat.map((seat) => {
+        seatsObj[seat._id] = seat;
+      });
+
+      return seatsObj;
+    }
 );
 
 export default makeSelectCreateBill;
@@ -107,5 +132,6 @@ export {
   makeSelectMax,
   makeSelectSeatsIsSelect,
   makeSelectTotal,
-  makeSelectSeats
+  makeSelectSeats,
+  makeSelectSeatsObject
 };

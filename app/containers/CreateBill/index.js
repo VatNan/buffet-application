@@ -8,7 +8,18 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
-import makeSelectCreateBill from './selectors';
+import {
+  makeSelectCompleteLevel,
+  makeSelectCustomerAmount,
+  makeSelectError,
+  makeSelectErrorMessage,
+  makeSelectGuide,
+  makeSelectLoading,
+  makeSelectMax,
+  makeSelectSeatsIsSelect,
+  makeSelectTotal,
+  makeSelectSeats
+} from './selectors';
 //components
 import Block from '../../components/Block';
 import TitleBlock from '../../components/TitleBlock';
@@ -21,6 +32,7 @@ import InputSubmit from './InputSubmit';
 
 export class CreateBill extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
+    console.log("bill -.", this.props)
     return (
       <Block
         direction="column"
@@ -40,7 +52,7 @@ export class CreateBill extends React.Component { // eslint-disable-line react/p
         <InputCustomerAmount />
         <InputAddSeats />
         <InputSubmit />
-        
+
       </Block>
     );
   }
@@ -51,7 +63,17 @@ CreateBill.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  CreateBill: makeSelectCreateBill(),
+  // CreateBill: makeSelectCreateBill(),
+  completeLevel: makeSelectCompleteLevel(),
+  customerAmount: makeSelectCustomerAmount(),
+  error: makeSelectError(),
+  errorMessage: makeSelectErrorMessage(),
+  guide: makeSelectGuide(),
+  loading: makeSelectLoading(),
+  max: makeSelectMax(),
+  seatsIsSelect: makeSelectSeatsIsSelect(),
+  total: makeSelectTotal(),
+  seats: makeSelectSeats()
 });
 
 function mapDispatchToProps(dispatch) {

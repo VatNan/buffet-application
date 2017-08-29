@@ -67,6 +67,26 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/create-bill',
+      name: 'createBill',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/CreateBill/reducer'),
+          import('containers/CreateBill/sagas'),
+          import('containers/CreateBill'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('createBill', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

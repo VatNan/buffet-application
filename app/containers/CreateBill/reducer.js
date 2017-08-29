@@ -13,7 +13,10 @@ import {
   CHOOSE_SEATS_REQUEST,
   CHOOSE_SEATS_SUCCESS,
   CHOOSE_SEATS_FAILURE,
-  CLEAR_ALL
+  CLEAR_ALL,
+  CREATE_BILL_REQUEST,
+  CREATE_BILL_SUCCESS,
+  CREATE_BILL_FAILURE
 } from './constants';
 
 const initialState = fromJS({
@@ -76,12 +79,25 @@ function createBillReducer(state = initialState, action) {
         .set('errorMessage', '');
     case CHOOSE_SEATS_SUCCESS:
       return state
-        .set('completeLevel', setCompleteLevelFromChooseSeats(state))
+        .set('completeLevel', setCompleteLevelFromChooseSeats(state));
     case CHOOSE_SEATS_FAILURE:
       return state
         .set('error', true)
         .set('completeLevel', 1)
         .set('errorMessage', 'กรุณาระบุจำนวนที่นั่งที่เลือกมากกว่าจำนวนลูกค้า');
+    case CREATE_BILL_REQUEST:
+      return state
+        .set('loading', true)
+        .set('error', true)
+        .set('errorMessage', '');
+    case CREATE_BILL_SUCCESS:
+      return state
+        .set('loading', false);
+    case CREATE_BILL_FAILURE:
+      return state
+        .set('loading', false)
+        .set('error', true)
+        .set('errorMessage', 'ไม่สามารถสร้างบิลได้ กรุณาลองใหม่อีกครั้ง');
     default:
       return state;
   }

@@ -7,7 +7,6 @@ import Label from '../../components/Label';
 
 
 function GroupSeat(props) {
-    console.log("GroupSeat", props)
     return (
         <Block
             flex="1"

@@ -21,6 +21,8 @@ const initialState = fromJS({
   seatsZoneBLimit8: [], // have 8 seat per 1 table
   seatsZoneBLimit4: [], // have 4 seat per 1 table
   seatsZoneBLimit2: [], // have 2 seat per 1 table
+  max: 0,
+  total: 0
 });
 
 function setSeatsFirstTime(state, action) {
@@ -28,6 +30,9 @@ function setSeatsFirstTime(state, action) {
     if (!action.seats || action.seats.length === 0) {
       return state;
     }
+
+    let max = 0;
+    let total = 0;
 
     action.seats.map((seat, index) => {
       let name = "";
@@ -38,16 +43,22 @@ function setSeatsFirstTime(state, action) {
       else if(seat.zone === "B" && seat.limit == 8) name = "seatsZoneBLimit8";
       else if(seat.zone === "B" && seat.limit == 4) name = "seatsZoneBLimit4";
       else if(seat.zone === "B" && seat.limit == 2) name = "seatsZoneBLimit2";
+      //count max and total of seats
+      max += seat.limit;
+      if (seat.status === "free") {
+        total += seat.limit;
+      }
 
       state = state
         .updateIn([ name ], seatGroup => {
-          // seatGroup.push(seat)
           return seatGroup.push(seat);
         });
     });
 
     return state
-      .set('loading', false);
+      .set('loading', false)
+      .set('max', max)
+      .set('total', total);
 }
 
 function manageSeatsReducer(state = initialState, action) {

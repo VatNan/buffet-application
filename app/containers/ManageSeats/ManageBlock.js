@@ -44,13 +44,13 @@ function ManageBlock(props) {
                     color="black"
                     fontSize="20px"
                 >
-                    ที่นั่งทั้งหมด : {props.max}
+                    ที่นั่งทั้งหมด : {props.max} ที่
                 </Label>
                 <Label
                     color="black"
                     fontSize="20px"
                 >
-                    ที่นั่งที่ว่างอยู่ : {props.total}
+                    ที่นั่งที่ว่างอยู่ : {props.total} ที่
                 </Label> 
             </Block>
         </Card>

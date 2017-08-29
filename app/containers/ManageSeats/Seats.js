@@ -17,6 +17,7 @@ function Seats(props) {
             key={index} 
             className={CLASS_BY_ZONE_SEAT[seat.zone] || ""} 
             color={BUTTON_COLOR_BY_STATUS_SEAT[seat.status] || "secondary"}
+            active={false}
             size="lg"
         >
             { seat.zone + seat.no }

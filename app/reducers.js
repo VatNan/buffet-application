@@ -9,6 +9,8 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 
 import globalReducer from 'containers/App/reducer';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
+import manageSeatsReducer from './containers/ManageSeats/reducer';
+import createBillReducer from './containers/CreateBill/reducer';
 
 /*
  * routeReducer
@@ -46,6 +48,8 @@ export default function createReducer(asyncReducers) {
     route: routeReducer,
     global: globalReducer,
     language: languageProviderReducer,
+    manageSeats: manageSeatsReducer,
+    createBill: createBillReducer,
     ...asyncReducers,
   });
 }

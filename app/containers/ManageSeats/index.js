@@ -24,7 +24,6 @@ import { loadSeats } from './actions';
 //pouch db
 import pouchdb from '../../config/pouchdb'
 //components
-import { Button, ButtonGroup, ButtonToolbar } from 'reactstrap';
 import Label from '../../components/Label';
 import Block from '../../components/Block';
 import Card from '../../components/Card';

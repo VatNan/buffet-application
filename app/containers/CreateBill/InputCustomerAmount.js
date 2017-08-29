@@ -18,7 +18,7 @@ function InputCustomAmount(props) {
                 fontSize="20px"
                 color="black"
             >
-                ขั้นตอนที่ 1: ระบุจำนวนลูกค้า
+               { "ขั้นตอนที่ 1: ระบุจำนวนลูกค้า  ( คงเหลือ " + props.total  + " ที่ )"}
             </Label>
             <InputGroup className="col-12 p-2">
                 <InputGroupAddon>   
@@ -28,7 +28,16 @@ function InputCustomAmount(props) {
                     type="number" 
                     min={0} 
                     step={1} 
-                    placeholder="กรุณาระบุจำนวนลูกค้า" 
+                    placeholder="กรุณาระบุจำนวนลูกค้า"
+                    value={props.customerAmount} 
+                    onChange={(e) => {
+                        let value = e.target.value + "";
+                        //validate value is ""
+                        if (value === "") value = "0";
+                        value = Number(value);
+
+                        props.checkCustomerAmount(value);
+                    }}
                 />
             </InputGroup>
         </Card>

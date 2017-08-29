@@ -7,6 +7,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
+import { 
+  checkCustomerAmount,
+  clearAll,
+  chooseSeats 
+} from './actions';
 import { createStructuredSelector } from 'reselect';
 import {
   makeSelectCompleteLevel,
@@ -28,9 +33,12 @@ import InputCustomerAmount from './InputCustomerAmount';
 import InputAddSeats from './InputAddSeats';
 import InputSubmit from './InputSubmit';
 
-// var test = 'one';
 
 export class CreateBill extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  componentWillUnmount() {
+    this.props.clearAll();
+  }
+
   render() {
     console.log("bill -.", this.props)
     return (
@@ -49,9 +57,24 @@ export class CreateBill extends React.Component { // eslint-disable-line react/p
           title="สร้างบิล"
         />
         
-        <InputCustomerAmount />
-        <InputAddSeats />
-        <InputSubmit />
+        <InputCustomerAmount 
+          total={this.props.total}
+          customerAmount={this.props.customerAmount}
+          checkCustomerAmount={this.props.checkCustomerAmount}
+        />
+
+        { 
+          this.props.completeLevel >= 1 
+          &&  <InputAddSeats
+                seats={this.props.seats}
+                seatsIsSelect={this.props.seatsIsSelect}
+                chooseSeats={this.props.chooseSeats}
+              />
+        }
+        { 
+          this.props.completeLevel >= 2
+          && <InputSubmit />
+        }
 
       </Block>
     );
@@ -59,7 +82,6 @@ export class CreateBill extends React.Component { // eslint-disable-line react/p
 }
 
 CreateBill.propTypes = {
-  dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -78,8 +100,16 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
-  };
+    checkCustomerAmount: (customerAmount) => {
+      dispatch(checkCustomerAmount(customerAmount));
+    },
+    clearAll: () => {
+      dispatch(clearAll());
+    },
+    chooseSeats: (seatsIsSelect) => {
+      dispatch(chooseSeats(seatsIsSelect));
+    }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateBill);

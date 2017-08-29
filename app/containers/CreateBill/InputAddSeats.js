@@ -31,11 +31,14 @@ function InputAddSeats(props) {
             <Select
                 className="col-12 p-2"
                 name="form-field-name"
-                value={""}
+                value={props.seatsIsSelect}
                 multi
                 simpleValue
-                options={options}
-                onChange={() => { }}
+                options={props.seats}
+                onChange={(value) => { 
+                    //console.log("testtest => " + value);
+                    props.chooseSeats(value);
+                }}
             />
         </Card>
     );

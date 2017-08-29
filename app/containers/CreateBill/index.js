@@ -26,8 +26,11 @@ import {
   makeSelectSeats
 } from './selectors';
 //components
+import { Alert  } from 'reactstrap';
 import Block from '../../components/Block';
 import TitleBlock from '../../components/TitleBlock';
+import Label from '../../components/Label';
+
 
 import InputCustomerAmount from './InputCustomerAmount';
 import InputAddSeats from './InputAddSeats';
@@ -56,7 +59,18 @@ export class CreateBill extends React.Component { // eslint-disable-line react/p
         <TitleBlock 
           title="สร้างบิล"
         />
-        
+
+        { 
+          this.props.error 
+          && <Alert color="warning" style={{ padding: "5px", width: '100%', textAlign: 'center' }}>
+                <Label
+                  color="black"
+                  fontSize="17px"
+                >
+                  {this.props.errorMessage}
+                </Label>
+             </Alert>
+        }
         <InputCustomerAmount 
           total={this.props.total}
           customerAmount={this.props.customerAmount}

@@ -58,7 +58,7 @@ function createBillReducer(state = initialState, action) {
       return state
         .set('error', true)
         .set('completeLevel', 0)
-        .set('errorMessage', 'ไม่สามารถสร้างบิลได้เนื่องจาก จำนวนลูกค้ามากกว่าจำนวนที่นั่งที่ว่างอยู่')
+        .set('errorMessage', 'กรุณาระบุจำนวนลูกค้ามากกว่าจำนวนที่นั่งที่ว่างอยู่')
         .set('seatsIsSelect', '');
     case CLEAR_ALL:
       return state
@@ -81,7 +81,7 @@ function createBillReducer(state = initialState, action) {
       return state
         .set('error', true)
         .set('completeLevel', 1)
-        .set('errorMessage', 'ไม่สามารถสร้างบิลได้เนื่องจาก จำนวนที่นั่งที่เลือกมากกว่าจำนวนลูกค้า');
+        .set('errorMessage', 'กรุณาระบุจำนวนที่นั่งที่เลือกมากกว่าจำนวนลูกค้า');
     default:
       return state;
   }

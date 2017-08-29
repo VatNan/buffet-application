@@ -20,6 +20,13 @@ function InputSubmit(props) {
             >
                 ขั้นตอนที่ 3: กดบันทึก
             </Label>
+            <Button 
+                color="primary"  
+                size="lg"
+                block
+            >
+                บันทึก
+            </Button>
 
         </Card>
     );

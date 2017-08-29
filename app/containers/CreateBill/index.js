@@ -9,18 +9,39 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import makeSelectCreateBill from './selectors';
+//components
+import Block from '../../components/Block';
+import TitleBlock from '../../components/TitleBlock';
+
+import InputCustomerAmount from './InputCustomerAmount';
+import InputAddSeats from './InputAddSeats';
+import InputSubmit from './InputSubmit';
+
+// var test = 'one';
 
 export class CreateBill extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <div>
+      <Block
+        direction="column"
+        flex="1"
+        margin="90px 0px 0px 0px"
+      >
         <Helmet
-          title="CreateBill"
+          title="สร้างบิล"
           meta={[
             { name: 'description', content: 'Description of CreateBill' },
           ]}
         />
-      </div>
+        <TitleBlock 
+          title="สร้างบิล"
+        />
+        
+        <InputCustomerAmount />
+        <InputAddSeats />
+        <InputSubmit />
+        
+      </Block>
     );
   }
 }

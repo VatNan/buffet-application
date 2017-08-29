@@ -30,7 +30,7 @@ function clearSeats(state) {
     .set('seatsZoneA', List([]))
     .set('seatsZoneBLimit8', List([]))
     .set('seatsZoneBLimit4', List([]))
-    .set('seatsZoneBLimit8', List([]));
+    .set('seatsZoneBLimit2', List([]));
 }
 
 function setSeatsFirstTime(state, action) {

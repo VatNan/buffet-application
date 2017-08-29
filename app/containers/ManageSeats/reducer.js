@@ -4,7 +4,7 @@
  *
  */
 
-import { fromJS } from 'immutable';
+import { fromJS, List } from 'immutable';
 import {
   DEFAULT_ACTION,
   LOAD_SEATS_REQUEST,
@@ -25,14 +25,27 @@ const initialState = fromJS({
   total: 0
 });
 
+function clearSeats(state) {
+  return state
+    .set('seatsZoneA', List([]))
+    .set('seatsZoneBLimit8', List([]))
+    .set('seatsZoneBLimit4', List([]))
+    .set('seatsZoneBLimit8', List([]));
+}
+
 function setSeatsFirstTime(state, action) {
     //validate data
     if (!action.seats || action.seats.length === 0) {
       return state;
     }
 
+
+    //variable of save max and total of seat
     let max = 0;
     let total = 0;
+
+    //clear seats
+    state = clearSeats(state);
 
     action.seats.map((seat, index) => {
       let name = "";

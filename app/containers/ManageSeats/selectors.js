@@ -60,6 +60,16 @@ const makeSelectSeatsZoneBLimit2 = () => createSelector(
   (substate) => substate.get('seatsZoneBLimit2').toJS()
 );
 
+const makeSelectMax = () => createSelector(
+  selectManageSeatsDomain(),
+  (substate) => substate.get('max')
+);
+
+const makeSelectTotal = () => createSelector(
+  selectManageSeatsDomain(),
+  (substate) => substate.get('total')
+);
+
 export default makeSelectManageSeats;
 export {
   selectManageSeatsDomain,
@@ -70,5 +80,7 @@ export {
   makeSelectSeatsZoneA,
   makeSelectSeatsZoneBLimit2,
   makeSelectSeatsZoneBLimit4,
-  makeSelectSeatsZoneBLimit8
+  makeSelectSeatsZoneBLimit8,
+  makeSelectMax,
+  makeSelectTotal
 };

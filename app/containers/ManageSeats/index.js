@@ -16,9 +16,13 @@ import {
   makeSelectSeatsZoneA,
   makeSelectSeatsZoneBLimit2,
   makeSelectSeatsZoneBLimit4,
-  makeSelectSeatsZoneBLimit8
+  makeSelectSeatsZoneBLimit8,
+  makeSelectMax,
+  makeSelectTotal
 } from './selectors';
 import { loadSeats } from './actions';
+//pouch db
+import pouchdb from '../../config/pouchdb'
 //components
 import { Button, ButtonGroup, ButtonToolbar } from 'reactstrap';
 import Label from '../../components/Label';
@@ -26,11 +30,26 @@ import Block from '../../components/Block';
 import Card from '../../components/Card';
 import GroupSeat from './GroupSeat';
 import TitleBlock from '../../components/TitleBlock';
-import ManegeBlock from './ManegeBlock';
+import ManageBlock from './ManageBlock';
 
 export class ManageSeats extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  db = pouchdb.db;
+  sync = pouchdb.sync;
+
   componentDidMount() {
       this.props.loadSeats();
+      //live data
+      //not best practice
+      this.db.changes({
+        live: true,
+        since: "now",
+        filter: function (doc) {
+          return doc._id.indexOf("seats") != -1;
+        }
+      }).on("change", () => {
+        console.log("changes")
+        this.props.loadSeats();
+      });
   }
 
   render() {
@@ -49,7 +68,10 @@ export class ManageSeats extends React.Component { // eslint-disable-line react/
         <TitleBlock 
           title="จัดการที่นั่ง"
         />
-        <ManegeBlock/>
+        <ManageBlock
+          max={this.props.max}
+          total={this.props.total}
+        />
         <GroupSeat
           title="Zone A (have 1 counter)"
           description="(1 counter: 12 seat)"
@@ -91,9 +113,11 @@ const mapStateToProps = createStructuredSelector({
   error: makeSelectError(),
   errorMessage: makeSelectErrorMessage(),
   seatsZoneA: makeSelectSeatsZoneA(),
-  seatsZoneBLimit8: makeSelectSeatsZoneBLimit2(), // have 8 seat per 1 table
+  seatsZoneBLimit2: makeSelectSeatsZoneBLimit2(), // have 8 seat per 1 table
   seatsZoneBLimit4: makeSelectSeatsZoneBLimit4(), // have 4 seat per 1 table
-  seatsZoneBLimit2: makeSelectSeatsZoneBLimit8(), // have 2 seat per 1 table
+  seatsZoneBLimit8: makeSelectSeatsZoneBLimit8(), // have 2 seat per 1 table
+  max: makeSelectMax(),
+  total: makeSelectTotal()
 });
 
 function mapDispatchToProps(dispatch) {

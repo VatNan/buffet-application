@@ -36,7 +36,6 @@ function InputAddSeats(props) {
                 simpleValue
                 options={props.seats}
                 onChange={(value) => { 
-                    //console.log("testtest => " + value);
                     props.chooseSeats(value);
                 }}
             />

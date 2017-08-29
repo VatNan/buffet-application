@@ -55,7 +55,6 @@ export class ManageSeats extends React.Component { // eslint-disable-line react/
   }
 
   goToCreateBill = () => {
-    console.log(this.props.router)
     this.props.router.push("create-bill");
   }
 

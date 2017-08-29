@@ -28,9 +28,7 @@ const db = pouchdb.db;
 const sync = pouchdb.sync;
 
 export function* checkCustomerAmount(action) {
-  // console.log("customerAmout in saga", customerAmout)
   let previousCompleteLevel = yield select(makeSelectCompleteLevel());
-  console.log(previousCompleteLevel);
   let total = yield select(makeSelectTotal());
   let customerAmout = Number(action.customerAmount);
   total = Number(total);
@@ -106,7 +104,6 @@ export function* chooseCreateBillSaga() {
 }
 
 export function* rootSagaCreateBill() {
-  console.log("test=========>", push)
   const watcherCheckCustomer = yield takeLatest(CHECK_CUSTOMER_AMOUNT_REQUEST, checkCustomerAmount);
   const watchChooseSeats = yield takeLatest(CHOOSE_SEATS_REQUEST, chooseSeatsInSaga);
   const watchCreateBill = yield takeLatest(CREATE_BILL_REQUEST, chooseCreateBillSaga);

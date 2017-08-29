@@ -44,7 +44,6 @@ export class CreateBill extends React.Component { // eslint-disable-line react/p
   }
 
   render() {
-    console.log("bill -.", this.props)
     return (
       <Block
         direction="column"

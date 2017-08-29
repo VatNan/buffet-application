@@ -54,7 +54,13 @@ export class ManageSeats extends React.Component { // eslint-disable-line react/
     this.listening.cancel();
   }
 
+  goToCreateBill = () => {
+    console.log(this.props.router)
+    this.props.router.push("create-bill");
+  }
+
   render() {
+    console.log(this.props)
     return (
       <Block
         direction="column"
@@ -73,6 +79,8 @@ export class ManageSeats extends React.Component { // eslint-disable-line react/
         <ManageBlock
           max={this.props.max}
           total={this.props.total}
+          goToCreateBill={this.goToCreateBill}
+          goToCheckBill={() => { alert("not implement!!"); }}
         />
         <GroupSeat
           title="Zone A (have 1 counter)"

@@ -32,8 +32,8 @@ export class Header extends React.Component { // eslint-disable-line react/prefe
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <Link 
-                  to="/"
+                <NavLink 
+                  href="/"
                   style={{ margin: "0px 10px" }}
                 >
                   <Label
@@ -41,11 +41,12 @@ export class Header extends React.Component { // eslint-disable-line react/prefe
                   >
                     จัดการที่นั่ง
                   </Label>
-                </Link>
+                </NavLink>
               </NavItem>
               <NavItem>
-                <Link 
-                  to="https://github.com/reactstrap/reactstrap"
+                <NavLink 
+                  target="_blank"
+                  href="https://github.com/VatNan/buffet-application"
                   style={{ margin: "0px 10px" }}
                 >
                   <Label
@@ -53,7 +54,7 @@ export class Header extends React.Component { // eslint-disable-line react/prefe
                   >
                     Github
                   </Label>
-                </Link>
+                </NavLink>
               </NavItem>
             </Nav>
           </Collapse>

@@ -39,16 +39,19 @@ export class ManageSeats extends React.Component { // eslint-disable-line react/
       this.props.loadSeats();
       //live data
       //not best practice
-      this.db.changes({
+      this.listening = this.db.changes({
         live: true,
         since: "now",
         filter: function (doc) {
           return doc._id.indexOf("seats") != -1;
         }
       }).on("change", () => {
-        console.log("changes")
         this.props.loadSeats();
       });
+  }
+
+  componentWillUnmount() {
+    this.listening.cancel();
   }
 
   render() {

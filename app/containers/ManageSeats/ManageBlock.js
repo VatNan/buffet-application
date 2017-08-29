@@ -1,4 +1,6 @@
 import React from 'react';
+//components
+import { Link } from 'react-router';
 import { Button, ButtonGroup } from 'reactstrap';
 import Card from '../../components/Card';
 import Block from '../../components/Block';
@@ -18,13 +20,15 @@ function ManageBlock(props) {
                 flex="1"
                 justifyContent="center"
             >
-                <Button 
-                    color="primary"
-                    className="col-5 m-1" 
-                    size="lg"
-                >
-                    สร้างบิล
-                </Button>
+                <Link to="create-bill">
+                    <Button 
+                        color="primary"
+                        className="col-5 m-1" 
+                        size="lg"
+                    >
+                        สร้างบิล
+                    </Button>
+                </Link>
                 {' '}
 
                 <Button 

@@ -25,7 +25,6 @@ import App from 'containers/App';
 import { makeSelectLocationState } from 'containers/App/selectors';
 
 // Import Language Provider
-import LanguageProvider from 'containers/LanguageProvider';
 
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-webpack-loader-syntax */
@@ -82,7 +81,6 @@ const rootRoute = {
 const render = (messages) => {
   ReactDOM.render(
     <Provider store={store}>
-      <LanguageProvider messages={messages}>
         <Router
           history={history}
           routes={rootRoute}
@@ -92,7 +90,6 @@ const render = (messages) => {
             applyRouterMiddleware(useScroll())
           }
         />
-      </LanguageProvider>
     </Provider>,
     document.getElementById('app')
   );

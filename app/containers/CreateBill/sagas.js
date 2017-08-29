@@ -99,7 +99,7 @@ export function* chooseCreateBillSaga() {
     ]);
     
     yield put(createBillPass());
-    yield put(push('manage-seats'));
+    yield put(push(''));
   } catch (error) {
     yield put(createBillFail(error));
   }

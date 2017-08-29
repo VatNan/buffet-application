@@ -4,7 +4,9 @@ import {
   customerAmountFail,
   chooseSeats,
   chooseSeatsPass,
-  chooseSeatsFail
+  chooseSeatsFail,
+  createBillPass,
+  createBillFail
 } from './actions';
 import {
   makeSelectTotal,
@@ -15,8 +17,14 @@ import {
 } from './selectors';
 import {
   CHECK_CUSTOMER_AMOUNT_REQUEST,
-  CHOOSE_SEATS_REQUEST
+  CHOOSE_SEATS_REQUEST,
+  CREATE_BILL_REQUEST
 } from './constants';
+import { push } from 'react-router-redux';
+//pouchdb
+import pouchdb from '../../config/pouchdb';
+const db = pouchdb.db;
+const sync = pouchdb.sync;
 
 export function* checkCustomerAmount(action) {
   // console.log("customerAmout in saga", customerAmout)
@@ -30,13 +38,11 @@ export function* checkCustomerAmount(action) {
     yield put(customerAmountPass());
 
     //fix for before previousCompleteLevel > 0
-    console.log("valid", previousCompleteLevel);
     if (previousCompleteLevel > 0) {
       let seatsIsSelect = yield select(makeSelectSeatsIsSelect());
       yield put(chooseSeats(seatsIsSelect));
     }
   } else {
-    console.log("fail");
     yield put(customerAmountFail());
   }
 
@@ -45,11 +51,11 @@ export function* checkCustomerAmount(action) {
 export function* chooseSeatsInSaga(action) {
   let seatsObj = yield select(makeSelectSeatsObject());
   let customerAmount = yield select(makeSelectCustomerAmount());
-  let seatsIsSelect = action.seatsIsSelect.split(",");
+  let seatsIsSelectArray = action.seatsIsSelect.split(",");
   customerAmount = Number(customerAmount);
 
   //get sum
-  let sumLimitOfseats = seatsIsSelect.reduce((total, seatId) => {
+  let sumLimitOfseats = seatsIsSelectArray.reduce((total, seatId) => {
       if (!seatId) {
         return total += 0;
       }
@@ -57,8 +63,6 @@ export function* chooseSeatsInSaga(action) {
       return total += seatsObj[seatId].limit;
     }, 0);
   
-
-  console.log("sumLimitOfseats     ", sumLimitOfseats, customerAmount);
   if (sumLimitOfseats >= customerAmount) {
     yield put(chooseSeatsPass());
   } else {
@@ -67,11 +71,44 @@ export function* chooseSeatsInSaga(action) {
 
 }
 
-
+export function* chooseCreateBillSaga() {
+  try {
+    let customerAmount = yield select(makeSelectCustomerAmount());
+    let seatsIsSelect = yield select(makeSelectSeatsIsSelect());
+  
+    let seatsObj = yield select(makeSelectSeatsObject());
+    let seatsIsSelectArray = seatsIsSelect.split(",");
+    let genareteId = 'bills:' + new Date().toJSON() + Math.random();
+    //not best practice
+    let setUpdateSeats =  seatsIsSelectArray.map((seatId) => {
+      return {
+        ...seatsObj[seatId],
+        status: 'busy',
+        billId: genareteId
+      };
+    });
+  
+    yield db.bulkDocs([
+      {
+        _id: genareteId,
+        customerAmount,
+        seatsIsSelect
+      },
+      ...setUpdateSeats
+    ]);
+    
+    yield put(createBillPass());
+    yield put(push('manage-seats'));
+  } catch (error) {
+    yield put(createBillFail(error));
+  }
+}
 
 export function* rootSagaCreateBill() {
+  console.log("test=========>", push)
   const watcherCheckCustomer = yield takeLatest(CHECK_CUSTOMER_AMOUNT_REQUEST, checkCustomerAmount);
-  const watchChooseSeats = yield takeLatest(CHOOSE_SEATS_REQUEST, chooseSeatsInSaga)
+  const watchChooseSeats = yield takeLatest(CHOOSE_SEATS_REQUEST, chooseSeatsInSaga);
+  const watchCreateBill = yield takeLatest(CREATE_BILL_REQUEST, chooseCreateBillSaga);
 }
 
 // All sagas to be loaded

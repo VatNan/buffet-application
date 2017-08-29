@@ -10,7 +10,8 @@ import Helmet from 'react-helmet';
 import { 
   checkCustomerAmount,
   clearAll,
-  chooseSeats 
+  chooseSeats,
+  createBill
 } from './actions';
 import { createStructuredSelector } from 'reselect';
 import {
@@ -87,7 +88,9 @@ export class CreateBill extends React.Component { // eslint-disable-line react/p
         }
         { 
           this.props.completeLevel >= 2
-          && <InputSubmit />
+          && <InputSubmit 
+               createBill={this.props.createBill}
+             />
         }
 
       </Block>
@@ -122,6 +125,9 @@ function mapDispatchToProps(dispatch) {
     },
     chooseSeats: (seatsIsSelect) => {
       dispatch(chooseSeats(seatsIsSelect));
+    },
+    createBill: () => {
+      dispatch(createBill());
     }
   }
 }

@@ -24,6 +24,7 @@ function InputSubmit(props) {
                 color="primary"  
                 size="lg"
                 block
+                onClick={props.createBill}
             >
                 บันทึก
             </Button>

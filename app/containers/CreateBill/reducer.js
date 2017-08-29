@@ -9,7 +9,15 @@ import {
   DEFAULT_ACTION,
 } from './constants';
 
-const initialState = fromJS({});
+const initialState = fromJS({
+  completeLevel: 0,
+  loading: false,
+  guide: '',
+  error: false,
+  errorMessage: '',
+  customerAmount: 0,
+  seatsIsSelect: []
+});
 
 function createBillReducer(state = initialState, action) {
   switch (action.type) {

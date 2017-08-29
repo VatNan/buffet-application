@@ -60,7 +60,6 @@ export class ManageSeats extends React.Component { // eslint-disable-line react/
   }
 
   render() {
-    console.log(this.props)
     return (
       <Block
         direction="column"
